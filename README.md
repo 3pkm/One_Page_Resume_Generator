@@ -2,7 +2,7 @@
 
 A Django web application that allows users to create, customize, and manage professional one-page resumes with ease.
 
-![OnePageResume Screenshot](assets/resume_preview.png)
+![OnePageResume Screenshot](resume/assets/Screenshot 2025-02-26 151833.png)
 
 ## 🌟 Features
 
@@ -14,8 +14,8 @@ A Django web application that allows users to create, customize, and manage prof
 - **Responsive Design**: Looks great on desktop and mobile devices
 
 <div align="center">
-  <img src="assets/template_gallery.png" alt="Template Gallery" width="400"/>
-  <img src="assets/responsive_design.png" alt="Responsive Design" width="400"/>
+  <img src="resume/assets/Screenshot 2025-02-26 151833.png" alt="Template Gallery" width="400"/>
+  <img src="resume/assets/Screenshot 2025-02-26 151708.png.png" alt="Responsive Design" width="400"/>
 </div>
 
 ## 🔧 Technologies
@@ -24,7 +24,6 @@ A Django web application that allows users to create, customize, and manage prof
 - Python 3.9+
 - HTML/CSS/JavaScript
 - Bootstrap 5
-- PostgreSQL (optional)
 
 ## 📋 Prerequisites
 
@@ -36,7 +35,7 @@ A Django web application that allows users to create, customize, and manage prof
 
 1. Clone the repository
    ```bash
-   git clone https://github.com/yourusername/OnePageResume.git
+   git clone https://github.com/3pkm/OnePageResume.git
    cd OnePageResume
    ```
 
@@ -83,7 +82,7 @@ A Django web application that allows users to create, customize, and manage prof
 6. Export your resume in your preferred format
 
 <div align="center">
-  <img src="assets/dashboard.png" alt="User Dashboard" width="600"/>
+  <img src="resume/assets/Screenshot 2025-02-26 151708.png" alt="User Dashboard" width="600"/>
 </div>
 
 ## 🧩 Project Structure
@@ -104,11 +103,6 @@ OnePageResume/
 ├── manage.py                # Django management script
 └── requirements.txt         # Python dependencies
 ```
-
-## 🔄 API Reference
-
-Document your API endpoints here if your project has an API.
-
 ## 🤝 Contributing
 
 Contributions are welcome! Please feel free to submit a Pull Request.
@@ -119,12 +113,8 @@ Contributions are welcome! Please feel free to submit a Pull Request.
 4. Push to the branch (`git push origin feature/amazing-feature`)
 5. Open a Pull Request
 
-## 📄 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
 ## 📞 Contact
 
-Your Name - [@yourtwitter](https://twitter.com/yourtwitter) - email@example.com
+Prakhar Jaiswal - [LinkedIn](https://www.linkedin.com/in/prakhar-jaiswal-772403278/) - jas.prakhar@gmail.com
 
-Project Link: [https://github.com/yourusername/OnePageResume](https://github.com/yourusername/OnePageResume)
+Project Link: [https://github.com/3pkm/OnePageResume](https://github.com/3pkm/OnePageResume)
