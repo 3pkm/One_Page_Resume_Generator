@@ -14,8 +14,8 @@ A Django web application that allows users to create, customize, and manage prof
 - **Responsive Design**: Looks great on desktop and mobile devices
 
 <div align="center">
-  <img src="resume/assets/Screenshot 2025-02-26 151833.png" alt="Template Gallery" width="400"/>
-  <img src="resume/assets/Screenshot 2025-02-26 151708.png.png" alt="Responsive Design" width="400"/>
+  <img src="resume_builder\resume\assets\Screenshot 2025-02-26 151708.png" alt="Template Gallery" width="400"/>
+  <img src="resume_builder\resume\assets\Screenshot 2025-02-26 151833.png" alt="Responsive Design" width="400"/>
 </div>
 
 ## 🔧 Technologies
@@ -82,7 +82,7 @@ A Django web application that allows users to create, customize, and manage prof
 6. Export your resume in your preferred format
 
 <div align="center">
-  <img src="resume/assets/Screenshot 2025-02-26 151708.png" alt="User Dashboard" width="600"/>
+  <img src="resume_builder\resume\assets\Screenshot 2025-02-26 151708.png" alt="User Dashboard" width="600"/>
 </div>
 
 ## 🧩 Project Structure
