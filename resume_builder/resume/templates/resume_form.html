@@ -1,0 +1,362 @@
+{% extends "base_layout.html" %}
+{% load static %}
+
+{% block title %}{% if edit_mode %}Edit Resume{% else %}Create Resume{% endif %}{% endblock %}
+
+{% block content %}
+<div class="container resume-form-container">
+    <h1 class="text-center mb-4">{% if edit_mode %}Edit{% else %}Build{% endif %} Your Resume</h1>
+    
+    {% if messages %}
+    <div class="messages">
+        {% for message in messages %}
+        <div class="alert {% if message.tags %}alert-{{ message.tags }}{% else %}alert-info{% endif %} alert-dismissible fade show">
+            {{ message }}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+
+    <form method="POST" class="resume-form">
+        {% csrf_token %}
+        
+        <!-- Personal Information Section -->
+        <div class="card mb-4">
+            <div class="card-header bg-primary text-white">
+                <h3 class="mb-0">Personal Information</h3>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label for="id_name" class="form-label">Full Name</label>
+                        {{ form.name }}
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="id_email" class="form-label">Email Address</label>
+                        {{ form.email }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label for="id_phone" class="form-label">Phone Number</label>
+                        {{ form.phone }}
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="id_location" class="form-label">Location</label>
+                        {{ form.location }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4 mb-3">
+                        <label for="id_linkedin" class="form-label">LinkedIn Profile</label>
+                        {{ form.linkedin }}
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <label for="id_github" class="form-label">GitHub Profile</label>
+                        {{ form.github }}
+                    </div>
+                    <div class="col-md-4 mb-3">
+                        <label for="id_portfolio" class="form-label">Portfolio Website</label>
+                        {{ form.portfolio }}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Career Objective Section -->
+        <div class="card mb-4">
+            <div class="card-header bg-primary text-white">
+                <h3 class="mb-0">Career Objective</h3>
+            </div>
+            <div class="card-body">
+                <div class="mb-3">
+                    <label for="id_objective" class="form-label">Career Objective</label>
+                    {{ form.objective }}
+                </div>
+            </div>
+        </div>
+
+        <!-- Education Section -->
+        <div class="card mb-4">
+            <div class="card-header bg-primary text-white">
+                <h3 class="mb-0">Education</h3>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label for="id_education_institution" class="form-label">Institution Name</label>
+                        {{ form.education_institution }}
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="id_education_degree" class="form-label">Degree/Diploma</label>
+                        {{ form.education_degree }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label for="id_education_field" class="form-label">Field of Study</label>
+                        {{ form.education_field }}
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="id_education_gpa" class="form-label">GPA</label>
+                        {{ form.education_gpa }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label for="id_education_start_date" class="form-label">Start Date</label>
+                        {{ form.education_start_date }}
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="id_education_end_date" class="form-label">End Date (or Expected)</label>
+                        {{ form.education_end_date }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12 mb-3">
+                        <label for="id_courses" class="form-label">Relevant Courses</label>
+                        <small class="text-muted d-block mb-2">Separate courses with commas</small>
+                        {{ form.courses }}
+                    </div>
+                </div>
+                <!-- Future feature: Add more education entries -->
+                <div class="education-append-container">
+                    <!-- Additional education entries will be added here -->
+                </div>
+                <div class="text-end">
+                    <button type="button" class="btn btn-outline-secondary btn-sm" id="add-education">
+                        <i class="fas fa-plus"></i> Add Another Education
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Skills Section -->
+        <div class="card mb-4">
+            <div class="card-header bg-primary text-white">
+                <h3 class="mb-0">Skills & Languages</h3>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label for="id_skills" class="form-label">Skills</label>
+                        <small class="text-muted d-block mb-2">Separate skills with commas (e.g., Python, JavaScript, Project Management)</small>
+                        {{ form.skills }}
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="id_languages" class="form-label">Languages</label>
+                        <small class="text-muted d-block mb-2">Separate languages with commas (e.g., English (Native), Spanish (Intermediate))</small>
+                        {{ form.languages }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12 mb-3">
+                        <label for="id_certifications" class="form-label">Certifications</label>
+                        <small class="text-muted d-block mb-2">Separate certifications with commas</small>
+                        {{ form.certifications }}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Work Experience Section -->
+        <div class="card mb-4">
+            <div class="card-header bg-primary text-white">
+                <h3 class="mb-0">Work Experience</h3>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label for="id_experience_company" class="form-label">Company Name</label>
+                        {{ form.experience_company }}
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="id_experience_position" class="form-label">Position</label>
+                        {{ form.experience_position }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label for="id_experience_location" class="form-label">Location</label>
+                        {{ form.experience_location }}
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="id_experience_start_date" class="form-label">Start Date</label>
+                        {{ form.experience_start_date }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label for="id_experience_end_date" class="form-label">End Date (or Present)</label>
+                        {{ form.experience_end_date }}
+                    </div>
+                    <div class="col-md-6">
+                        <!-- Spacing -->
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12 mb-3">
+                        <label for="id_experience_description" class="form-label">Description</label>
+                        <small class="text-muted d-block mb-2">Describe your responsibilities and achievements</small>
+                        {{ form.experience_description }}
+                    </div>
+                </div>
+                <!-- Future feature: Add more work experience entries -->
+                <div class="experience-append-container">
+                    <!-- Additional experience entries will be added here -->
+                </div>
+                <div class="text-end">
+                    <button type="button" class="btn btn-outline-secondary btn-sm" id="add-experience">
+                        <i class="fas fa-plus"></i> Add Another Experience
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Projects Section -->
+        <div class="card mb-4">
+            <div class="card-header bg-primary text-white">
+                <h3 class="mb-0">Projects</h3>
+            </div>
+            <div class="card-body">
+                <div id="projects-container">
+                    <div class="project-entry mb-3">
+                        <div class="row">
+                            <div class="col-12 mb-2">
+                                <label class="form-label">Project Title</label>
+                                <input type="text" class="form-control" name="project_heading" placeholder="Enter project title">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12">
+                                <label class="form-label">Project Description</label>
+                                <textarea class="form-control" name="project_description" rows="2" placeholder="Describe your project, technologies used, and outcomes"></textarea>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="text-end mt-2">
+                    <button type="button" class="btn btn-outline-secondary btn-sm" id="add-project">
+                        <i class="fas fa-plus"></i> Add Another Project
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Additional Information Section -->
+        <div class="card mb-4">
+            <div class="card-header bg-primary text-white">
+                <h3 class="mb-0">Additional Information</h3>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label for="id_leadership" class="form-label">Leadership Experience</label>
+                        {{ form.leadership }}
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="id_achievements" class="form-label">Achievements & Awards</label>
+                        {{ form.achievements }}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- References Section -->
+        <div class="card mb-4">
+            <div class="card-header bg-primary text-white">
+                <h3 class="mb-0">References</h3>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label for="id_reference_name" class="form-label">Reference Name</label>
+                        {{ form.reference_name }}
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="id_reference_position" class="form-label">Position</label>
+                        {{ form.reference_position }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label for="id_reference_company" class="form-label">Company</label>
+                        {{ form.reference_company }}
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="id_reference_email" class="form-label">Email</label>
+                        {{ form.reference_email }}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label for="id_reference_phone" class="form-label">Phone (Optional)</label>
+                        {{ form.reference_phone }}
+                    </div>
+                </div>
+                <!-- Future feature: Add more references -->
+                <div class="references-append-container">
+                    <!-- Additional reference entries will be added here -->
+                </div>
+                <div class="text-end">
+                    <button type="button" class="btn btn-outline-secondary btn-sm" id="add-reference">
+                        <i class="fas fa-plus"></i> Add Another Reference
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Form Submit Section -->
+        <div class="d-grid gap-2 d-md-flex justify-content-md-end mt-4">
+            <a href="{% url 'resume_list' %}" class="btn btn-outline-secondary me-md-2">
+                <i class="fas fa-times"></i> Cancel
+            </a>
+            <button type="submit" class="btn btn-primary btn-lg">
+                <i class="fas fa-save"></i> {% if edit_mode %}Save Changes{% else %}Create Resume{% endif %}
+            </button>
+        </div>
+    </form>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Project handling
+        const projectsContainer = document.getElementById('projects-container');
+        const addProjectBtn = document.getElementById('add-project');
+        
+        addProjectBtn.addEventListener('click', function() {
+            const projectCount = document.querySelectorAll('.project-entry').length;
+            const projectEntry = document.createElement('div');
+            projectEntry.classList.add('project-entry', 'mb-3', 'border-top', 'pt-3');
+            
+            projectEntry.innerHTML = `
+                <div class="d-flex justify-content-between align-items-center mb-2">
+                    <h5>Project ${projectCount + 1}</h5>
+                    <button type="button" class="btn-close remove-project" aria-label="Remove project"></button>
+                </div>
+                <div class="row">
+                    <div class="col-12 mb-2">
+                        <label class="form-label">Project Title</label>
+                        <input type="text" class="form-control" name="project_heading" placeholder="Enter project title">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-12">
+                        <label class="form-label">Project Description</label>
+                        <textarea class="form-control" name="project_description" rows="2" placeholder="Describe your project, technologies used, and outcomes"></textarea>
+                    </div>
+                </div>
+            `;
+            
+            projectsContainer.appendChild(projectEntry);
+            
+            // Setup remove button event
+            const removeBtn = projectEntry.querySelector('.remove-project');
+            removeBtn.addEventListener('click', function() {
+                projectEntry.remove();
+            });
+        });
+    });
+</script>
+{% endblock %}

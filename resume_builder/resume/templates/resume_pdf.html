@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{{ resume.name }}'s Resume</title>
+    <style>
+      body {
+        font-family: 'Roboto', Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        line-height: 1.6;
+        color: #333;
+        background-color: #ffffff;
+      }
+      .container {
+        width: 100%;
+        max-width: 1000px;
+        margin: 0 auto;
+        padding: 20px 0;
+      }
+      header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 2px solid #333;
+        padding-bottom: 15px;
+        margin-bottom: 20px;
+      }
+      .person-name {
+        margin: 0;
+        font-size: 24pt;
+        color: #222;
+        font-weight: 700;
+      }
+      .contact-info {
+        text-align: right;
+        font-size: 9pt;
+      }
+      .contact-info p {
+        margin: 3px 0;
+      }
+      section {
+        margin-top: 15px;
+        page-break-inside: avoid;
+      }
+      h2 {
+        font-size: 14pt;
+        margin-bottom: 10px;
+        border-bottom: 1px solid #333;
+        padding-bottom: 5px;
+        color: #444;
+        font-weight: 600;
+        page-break-after: avoid;
+      }
+      ul {
+        padding-left: 15px;
+        margin-bottom: 15px;
+      }
+      ul li {
+        margin-bottom: 5px;
+        font-size: 10pt;
+        list-style: disc;
+      }
+      .skills-list,
+      .courses-list {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        list-style-type: none;
+        padding-left: 0;
+      }
+      .skills-list li,
+      .courses-list li {
+        display: inline-block;
+        background-color: #f0f0f0;
+        padding: 3px 8px;
+        border-radius: 10px;
+        font-size: 9pt;
+        border: 1px solid #ddd;
+      }
+      .education-item, .experience-item, .reference-item {
+        margin-bottom: 15px;
+        padding: 10px;
+        background-color: #f9f9f9;
+        border-radius: 5px;
+      }
+      .education-item h3, .experience-item h3, .reference-item h3 {
+        margin-top: 0;
+        font-size: 12pt;
+        font-weight: 600;
+        color: #333;
+      }
+      .education-item p, .experience-item p, .reference-item p {
+        margin: 3px 0;
+        font-size: 10pt;
+      }
+      .date-range {
+        font-style: italic;
+        color: #666;
+      }
+      .project-item {
+        margin-bottom: 10px;
+      }
+      .project-title {
+        font-weight: 600;
+        font-size: 11pt;
+      }
+      .cert-langs-container {
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 15px;
+      }
+      .cert-langs-container section {
+        flex: 1;
+        min-width: 200px;
+      }
+      p {
+        margin: 5px 0;
+        font-size: 10pt;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <!-- Name and Contact Information -->
+      <header>
+        <div>
+          <h1 class="person-name">{{ resume.name }}</h1>
+        </div>
+        <div class="contact-info">
+          <p>{{ resume.email }}</p>
+          <p>{{ resume.phone }}</p>
+          <p>{{ resume.location }}</p>
+          {% if resume.linkedin %}
+          <p>LinkedIn: {{ resume.linkedin }}</p>
+          {% endif %}
+          {% if resume.github %}
+          <p>GitHub: {{ resume.github }}</p>
+          {% endif %}
+          {% if resume.portfolio %}
+          <p>Portfolio: {{ resume.portfolio }}</p>
+          {% endif %}
+        </div>
+      </header>
+  
+      <!-- Career Objective -->
+      <section>
+        <h2>Career Objective</h2>
+        <p>{{ resume.objective }}</p>
+      </section>
+  
+      <!-- Education -->
+      <section>
+        <h2>Education</h2>
+        {% for edu in education %}
+        <div class="education-item">
+          <h3>{{ edu.degree }} in {{ edu.field }}</h3>
+          <p><strong>{{ edu.institution }}</strong></p>
+          <p class="date-range">{{ edu.start_date }} - {{ edu.end_date }}</p>
+          {% if edu.gpa %}<p>GPA: {{ edu.gpa }}</p>{% endif %}
+        </div>
+        {% empty %}
+        <p>{{ resume.education }}</p>
+        {% endfor %}
+      </section>
+  
+      <!-- Relevant Courses -->
+      {% if courses %}
+      <section>
+        <h2>Relevant Courses</h2>
+        <ul class="courses-list">
+          {% for course in courses %}
+          <li>{{ course }}</li>
+          {% endfor %}
+        </ul>
+      </section>
+      {% endif %}
+  
+      <!-- Skills -->
+      {% if skills %}
+      <section>
+        <h2>Skills</h2>
+        <ul class="skills-list">
+          {% for skill in skills %}
+          <li>{{ skill }}</li>
+          {% endfor %}
+        </ul>
+      </section>
+      {% endif %}
+
+      <!-- Work Experience -->
+      {% if experience %}
+      <section{% if experience|length > 1 %} class="page-break"{% endif %}>
+        <h2>Work Experience</h2>
+        {% for exp in experience %}
+        <div class="experience-item">
+          <h3>{{ exp.position }}</h3>
+          <p><strong>{{ exp.company }}</strong> - {{ exp.location }}</p>
+          <p class="date-range">{{ exp.start_date }} - {{ exp.end_date }}</p>
+          <p>{{ exp.description }}</p>
+        </div>
+        {% endfor %}
+      </section>
+      {% endif %}
+  
+      <!-- Projects -->
+      {% if projects %}
+      <section>
+        <h2>Projects</h2>
+        {% for project in projects %}
+        <div class="project-item">
+          <span class="project-title">{{ project.heading }}:</span>
+          <span>{{ project.description }}</span>
+        </div>
+        {% endfor %}
+      </section>
+      {% endif %}
+  
+      <!-- Leadership -->
+      {% if resume.leadership %}
+      <section>
+        <h2>Leadership</h2>
+        <p>{{ resume.leadership }}</p>
+      </section>
+      {% endif %}
+
+      <!-- Achievements -->
+      {% if resume.achievements %}
+      <section>
+        <h2>Achievements</h2>
+        <p>{{ resume.achievements }}</p>
+      </section>
+      {% endif %}
+
+      <div class="cert-langs-container">
+        <!-- Certifications -->
+        {% if certifications %}
+        <section>
+          <h2>Certifications</h2>
+          <ul>
+            {% for cert in certifications %}
+            <li>{{ cert }}</li>
+            {% endfor %}
+          </ul>
+        </section>
+        {% endif %}
+
+        <!-- Languages -->
+        {% if languages %}
+        <section>
+          <h2>Languages</h2>
+          <ul>
+            {% for lang in languages %}
+            <li>{{ lang }}</li>
+            {% endfor %}
+          </ul>
+        </section>
+        {% endif %}
+      </div>
+
+      <!-- References -->
+      {% if references %}
+      <section{% if references|length > 1 %} class="page-break"{% endif %}>
+        <h2>References</h2>
+        {% for ref in references %}
+        <div class="reference-item">
+          <h3>{{ ref.name }}</h3>
+          <p>{{ ref.position }} at {{ ref.company }}</p>
+          <p>Email: {{ ref.email }}</p>
+          {% if ref.phone %}<p>Phone: {{ ref.phone }}</p>{% endif %}
+        </div>
+        {% endfor %}
+      </section>
+      {% endif %}
+    </div>
+  </body>
+</html>
