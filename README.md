@@ -2,7 +2,7 @@
 
 A Django web application that allows users to create, customize, and manage professional one-page resumes with ease.
 
-![OnePageResume Screenshot](screenshots/demo.png) *(Add a screenshot of your application here)*
+![OnePageResume Screenshot](assets/resume_preview.png)
 
 ## 🌟 Features
 
@@ -12,6 +12,11 @@ A Django web application that allows users to create, customize, and manage prof
 - **Export Options**: Download as PDF, DOCX, or HTML
 - **User Accounts**: Save and manage multiple resume versions
 - **Responsive Design**: Looks great on desktop and mobile devices
+
+<div align="center">
+  <img src="assets/template_gallery.png" alt="Template Gallery" width="400"/>
+  <img src="assets/responsive_design.png" alt="Responsive Design" width="400"/>
+</div>
 
 ## 🔧 Technologies
 
@@ -76,6 +81,10 @@ A Django web application that allows users to create, customize, and manage prof
 4. Choose a template that fits your style
 5. Preview your resume and make adjustments as needed
 6. Export your resume in your preferred format
+
+<div align="center">
+  <img src="assets/dashboard.png" alt="User Dashboard" width="600"/>
+</div>
 
 ## 🧩 Project Structure
 
